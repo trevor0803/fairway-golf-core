@@ -27,7 +27,7 @@
         const response=await fetch(source,{cache:'no-store'});
         if(!response.ok) throw new Error('Golf source returned '+response.status);
         let html=await response.text();
-        html=html.replace(/<head([^>]*)>/i,'<head$1><base href="'+source+'"><title>Fairway Golf Core</title>');
+        html=html.replace(/<head([^>]*)>/i,'<head$1><base href="'+source+'"><title>Fairway Golf Core</title><link rel="stylesheet" href="'+patchBase+'/core-layout.css?v=1">');
         const enhancements='<script src="'+patchBase+'/core-enhancements-v2.js?v=1"><'+'/script>';
         const directStart='<script>window.addEventListener("load",function(){setTimeout(function(){try{if(typeof startMode==="function")startMode("quick",1);var home=document.getElementById("menubtn");if(home)home.style.display="none";document.title="Fairway Golf Core — Enhanced";}catch(err){console.error("Golf Core direct start failed",err);}},160);});<'+'/script>';
         html=html.replace(/<\/body>/i,enhancements+directStart+'</body>');
