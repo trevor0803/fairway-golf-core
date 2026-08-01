@@ -61,14 +61,14 @@
   <section class="start-screen" id="startScreen">
     <div class="start-card">
       <div class="logo">⛳</div>
-      <small>FAIRWAY GOLF CORE · V2</small>
-      <h1>One hole.<br>Better golf feel.</h1>
-      <p>This build is focused on camera, aiming, swing path, ball tracking, lies and putting.</p>
+      <small>FAIRWAY GOLF CORE · V3</small>
+      <h1>One hole.<br>Closer golf view.</h1>
+      <p>This build fixes the compressed course view and makes the ball easy to track.</p>
       <ul>
-        <li>Drag the bright landing target to aim</li>
-        <li>Pull down, then accelerate upward through impact</li>
-        <li>Your return path and tempo control the miss</li>
-        <li>The camera follows the ball and changes for putting</li>
+        <li>Larger fairway, green, hazards and flag</li>
+        <li>Camera sits closer behind the golfer</li>
+        <li>Bright ball glow and visible flight trail</li>
+        <li>Map view remains available for full-hole strategy</li>
       </ul>
       <button class="primary" id="startButton">PLAY THE PAR 3</button>
     </div>
@@ -89,6 +89,7 @@
   </section>
 </main>
 <script src="game.js"></script>
+<script src="camera-fix.js"></script>
 <script>
 (function animateGreenRead(){
   if(typeof game !== 'undefined' && game.started && !game.flying && game.lie === 'green') render();
