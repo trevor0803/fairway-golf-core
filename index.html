@@ -89,5 +89,11 @@
   </section>
 </main>
 <script src="game.js"></script>
+<script>
+(function animateGreenRead(){
+  if(typeof game !== 'undefined' && game.started && !game.flying && game.lie === 'green') render();
+  requestAnimationFrame(animateGreenRead);
+})();
+</script>
 </body>
 </html>
