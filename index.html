@@ -16,22 +16,19 @@
 </head>
 <body>
   <div id="boot">
-    <div id="loading"><strong>FAIRWAY GOLF CORE</strong><span>Loading gameplay overhaul…</span></div>
+    <div id="loading"><strong>FAIRWAY GOLF CORE</strong><span>Loading the proven 3D golf engine…</span></div>
     <div id="error"><strong>COURSE COULD NOT LOAD</strong><span>Refresh the page to try again.</span></div>
   </div>
   <script>
     (async function loadGolfCore(){
       const source='https://fairway-legends.vercel.app/';
-      const patchBase=location.origin;
       try{
         const response=await fetch(source,{cache:'no-store'});
         if(!response.ok) throw new Error('Golf source returned '+response.status);
         let html=await response.text();
         html=html.replace(/<head([^>]*)>/i,'<head$1><base href="'+source+'"><title>Fairway Golf Core</title>');
-        html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="'+patchBase+'/gameplay-v2.css?v=4"></head>');
-        const patches='<script src="'+patchBase+'/gameplay-v2.js?v=4"><'+'/script><script src="'+patchBase+'/swing-hotfix.js?v=2"><'+'/script>';
-        const directStart='<script>window.addEventListener("load",function(){setTimeout(function(){try{if(typeof startMode==="function")startMode("quick",1);var home=document.getElementById("menubtn");if(home)home.style.display="none";document.title="Fairway Golf Core — Gameplay Overhaul";}catch(err){console.error("Golf Core direct start failed",err);}},160);});<'+'/script>';
-        html=html.replace(/<\/body>/i,patches+directStart+'</body>');
+        const directStart='<script>window.addEventListener("load",function(){setTimeout(function(){try{if(typeof startMode==="function")startMode("quick",1);var home=document.getElementById("menubtn");if(home)home.style.display="none";document.title="Fairway Golf Core";}catch(err){console.error("Golf Core direct start failed",err);}},160);});<'+'/script>';
+        html=html.replace(/<\/body>/i,directStart+'</body>');
         document.open();document.write(html);document.close();
       }catch(error){
         console.error(error);
