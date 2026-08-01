@@ -3,49 +3,91 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#0a1b12">
+<meta name="theme-color" content="#0b2117">
 <title>Fairway Golf Core</title>
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%;overflow:hidden;background:#07110c;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#fff}button{font:inherit;border:0;color:inherit}.app{height:100%;max-width:520px;margin:auto;position:relative;background:#63b6df;overflow:hidden}canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.hud{position:absolute;top:max(10px,env(safe-area-inset-top));left:10px;right:10px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.card{background:rgba(7,24,15,.82);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);border-radius:15px;padding:9px 11px;box-shadow:0 8px 25px rgba(0,0,0,.2)}.card b{display:block;font-size:13px}.card span{display:block;font-size:11px;color:#d5e0d8;margin-top:2px}.right{text-align:right}.tag{position:absolute;top:max(82px,calc(env(safe-area-inset-top) + 72px));left:50%;transform:translateX(-50%);background:rgba(255,255,255,.93);color:#193425;padding:7px 12px;border-radius:99px;font-size:10px;font-weight:900;white-space:nowrap}.shape{position:absolute;left:10px;bottom:max(118px,calc(env(safe-area-inset-bottom) + 108px));width:154px;background:rgba(7,24,15,.86);border:1px solid rgba(255,255,255,.16);border-radius:15px;padding:9px}.label{font-size:9px;color:#b8c7bd;letter-spacing:.12em;font-weight:900}.row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:6px}.chip{padding:7px 3px;border-radius:8px;background:rgba(255,255,255,.09);font-size:9px;font-weight:900}.chip.on{background:#7ae69d;color:#0a2114}.club{position:absolute;left:50%;transform:translateX(-50%);bottom:max(116px,calc(env(safe-area-inset-bottom) + 106px));width:74px;height:74px;border-radius:50%;background:linear-gradient(#fff,#dce7df);color:#173422;font-weight:1000;font-size:22px;box-shadow:0 10px 28px rgba(0,0,0,.3);border:5px solid rgba(255,255,255,.32)}.club small{display:block;font-size:9px;color:#57705f}.circle{position:absolute;right:12px;width:48px;height:48px;border-radius:50%;background:rgba(7,24,15,.86);border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 25px rgba(0,0,0,.25);font-weight:900}.overview{bottom:max(164px,calc(env(safe-area-inset-bottom) + 154px));font-size:20px}.reset{bottom:max(108px,calc(env(safe-area-inset-bottom) + 98px))}.swing{position:absolute;left:50%;transform:translateX(-50%);bottom:max(10px,env(safe-area-inset-bottom));width:min(94%,500px);height:96px;border-radius:25px;background:rgba(5,16,10,.94);border:1px solid rgba(255,255,255,.15);box-shadow:0 -5px 25px rgba(0,0,0,.25);touch-action:none}.track{position:absolute;left:50%;top:10px;bottom:10px;width:4px;transform:translateX(-50%);background:rgba(255,255,255,.12);border-radius:99px}.thumb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#fff,#d6e4da 65%,#8da597);color:#173422;font-size:10px;font-weight:1000;box-shadow:0 5px 18px rgba(0,0,0,.35)}.hint{position:absolute;left:12px;top:14px;color:#c6d2ca;font-size:10px;line-height:1.35}.meter{position:absolute;right:12px;top:13px;text-align:right;color:#c6d2ca;font-size:10px}.meter b{display:block;color:#fff;font-size:16px}.message{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);min-width:220px;max-width:88%;background:rgba(4,14,8,.92);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:16px;text-align:center;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 18px 60px rgba(0,0,0,.42)}.message.on{opacity:1;transform:translate(-50%,-55%)}.message b{display:block;font-size:19px}.message span{display:block;font-size:12px;color:#d1dcd5;margin-top:4px}.start,.finish{position:absolute;inset:0;background:linear-gradient(180deg,#07110c,#0d2216);z-index:20;display:flex;align-items:center;justify-content:center;padding:24px}.finish{display:none;background:rgba(4,12,7,.86)}.panel{width:min(100%,420px);text-align:center}.logo{width:72px;height:72px;border-radius:22px;margin:0 auto 16px;display:grid;place-items:center;background:linear-gradient(145deg,#8ff0ae,#3aa764);font-size:34px;color:#0b2415}.panel small{color:#7ae69d;letter-spacing:.16em;font-weight:1000}.panel h1{font-size:38px;line-height:.98;margin:8px 0 12px}.panel p{color:#b7c4bb;line-height:1.5}.panel ul{text-align:left;color:#dce6df;font-size:13px;line-height:1.55;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px 18px 14px 34px}.primary{width:100%;padding:15px;border-radius:15px;background:#7ae69d;color:#092014;font-weight:1000;margin-top:10px}.finishbox{width:min(100%,400px);background:#f5f7f5;color:#13261b;border-radius:22px;padding:22px}.finishbox h2{font-size:34px;margin:5px 0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:16px 0}.stats div{background:#e5eee8;border-radius:13px;padding:10px}.stats small{display:block;color:#607469;font-size:9px;letter-spacing:0}.stats b{font-size:19px}.secondary{width:100%;padding:13px;border-radius:13px;background:#173a26;color:#fff;font-weight:900}.hidden{display:none!important}@media(min-width:700px){body{background:#07110c}.app{box-shadow:0 0 70px rgba(0,0,0,.45)}}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="app">
-<canvas id="c"></canvas>
-<div class="hud"><div class="card"><b id="lie">TEE • 100%</b><span id="dist">168 YDS TO PIN</span><span>WIND 6 MPH ↗</span></div><div class="card right"><b>HOLE 1 • PAR 3</b><span id="stroke">1ST SHOT</span><span id="score">EVEN</span></div></div>
-<div class="tag" id="tag">DRAG THE LANDING RING TO AIM</div>
-<div class="shape"><div class="label">SHOT SHAPE</div><div class="row"><button class="chip" data-shape="draw">DRAW</button><button class="chip on" data-shape="straight">STRAIGHT</button><button class="chip" data-shape="fade">FADE</button></div><div class="label" style="margin-top:9px">TRAJECTORY</div><div class="row"><button class="chip" data-flight="low">LOW</button><button class="chip on" data-flight="normal">NORMAL</button><button class="chip" data-flight="high">HIGH</button></div></div>
-<button class="club" id="club">7I<small>172 YDS</small></button><button class="circle overview" id="overview">◉</button><button class="circle reset" id="reset">R</button>
-<div class="swing" id="swing"><div class="track"></div><div class="thumb" id="thumb">SWING</div><div class="hint">PULL DOWN<br>THEN DRIVE UP</div><div class="meter">LOAD<b id="load">0%</b><span id="tempo">TEMPO —</span></div></div>
-<div class="message" id="message"><b></b><span></span></div>
-<section class="start" id="start"><div class="panel"><div class="logo">⛳</div><small>FAIRWAY GOLF CORE</small><h1>One hole.<br>Real golf feel.</h1><p>This version tests only the golf: aiming, swing path, ball flight, lies and putting.</p><ul><li>Drag the yellow landing ring to aim</li><li>Pull down, then swipe upward through impact</li><li>Use overview to read hazards and green</li><li>Every lie changes distance and control</li></ul><button class="primary" id="startBtn">PLAY THE PAR 3</button></div></section>
-<section class="finish" id="finish"><div class="finishbox"><small>HOLE COMPLETE</small><h2 id="finishTitle">PAR</h2><p id="finishText">Solid work.</p><div class="stats"><div><small>STROKES</small><b id="fs">3</b></div><div><small>GIR</small><b id="fg">YES</b></div><div><small>PUTTS</small><b id="fp">2</b></div></div><button class="secondary" id="again">PLAY AGAIN</button></div></section>
-</div>
-<script>
-const C=document.getElementById('c'),X=C.getContext('2d');let W,H,D=Math.min(2,devicePixelRatio||1);const clubs=[['4I',205],['5I',190],['6I',180],['7I',172],['8I',158],['9I',143],['PW',126],['GW',108],['SW',86],['P',35]];let g={started:false,shot:1,score:0,putts:0,gir:false,club:3,shape:'straight',flight:'normal',ball:{x:0,z:0},aim:{x:3,z:-168},lie:'tee',factor:1,control:1,dragAim:false,swing:null,flying:false,overview:false};const pin={x:3,z:-168};
-function resize(){W=C.clientWidth;H=C.clientHeight;C.width=W*D;C.height=H*D;X.setTransform(D,0,0,D,0,0);draw()}addEventListener('resize',resize);
-function worldToScreen(p){if(g.overview){return{x:W/2+p.x*2.2,y:H*.16+(-p.z)*2.55}}let dz=Math.max(1,g.ball.z-p.z),scale=1/(1+dz/85);return{x:W/2+(p.x-g.ball.x)*4.2*scale,y:H*.78-dz*2.15*scale}}
-function terrain(p){let dx=p.x-3,dz=p.z+168;if(dx*dx/400+dz*dz/225<1)return['green',1,1];if(Math.abs(p.x+17)<10&&Math.abs(p.z+158)<7)return['bunker',.72,.58];if(Math.abs(p.x-21)<9&&Math.abs(p.z+176)<6)return['bunker',.72,.58];if(Math.abs(p.x-35)<17&&Math.abs(p.z+118)<35)return['water',0,0];let t=Math.max(0,Math.min(1,(-p.z-12)/145)),center=Math.sin(t*2.7)*5,width=10+t*18;if(p.z<-8&&p.z>-158&&Math.abs(p.x-center)<width)return['fairway',1,.96];if(p.z>-8)return['tee',1,1];return['rough',.82,.7]}
-function drawCourse(){let sky=X.createLinearGradient(0,0,0,H*.5);sky.addColorStop(0,'#74b9e4');sky.addColorStop(1,'#a8d7ec');X.fillStyle=sky;X.fillRect(0,0,W,H);X.fillStyle='#356f36';X.fillRect(0,H*.43,W,H*.57);if(g.overview){X.fillStyle='#3c7c3d';X.fillRect(W*.06,H*.06,W*.88,H*.89);let pts=[];for(let i=0;i<17;i++){let z=-i*10,x=Math.sin(i/16*2.7)*5,w=10+i/16*18;pts.push([x-w,z],[x+w,z])}X.fillStyle='#63b451';X.beginPath();pts.filter((_,i)=>i%2===0).forEach((p,i)=>{let s=worldToScreen({x:p[0],z:p[1]});i?X.lineTo(s.x,s.y):X.moveTo(s.x,s.y)});pts.filter((_,i)=>i%2===1).reverse().forEach(p=>{let s=worldToScreen({x:p[0],z:p[1]});X.lineTo(s.x,s.y)});X.closePath();X.fill()}else{X.fillStyle='#2f6f34';X.beginPath();X.moveTo(0,H*.47);X.quadraticCurveTo(W*.24,H*.38,W*.42,H*.48);X.quadraticCurveTo(W*.68,H*.38,W,H*.48);X.lineTo(W,H);X.lineTo(0,H);X.fill();X.fillStyle='#63b451';X.beginPath();X.moveTo(W*.17,H);X.quadraticCurveTo(W*.26,H*.62,W*.48,H*.45);X.quadraticCurveTo(W*.72,H*.56,W*.86,H);X.fill()}
-let green=worldToScreen(pin);X.fillStyle='#78c85d';X.beginPath();X.ellipse(green.x,green.y,g.overview?45:68,g.overview?32:18,0,0,Math.PI*2);X.fill();let b1=worldToScreen({x:-17,z:-158}),b2=worldToScreen({x:21,z:-176});X.fillStyle='#ead58c';X.beginPath();X.ellipse(b1.x,b1.y,g.overview?22:34,g.overview?11:8,-.2,0,Math.PI*2);X.fill();X.beginPath();X.ellipse(b2.x,b2.y,g.overview?19:30,g.overview?10:7,.3,0,Math.PI*2);X.fill();let w=worldToScreen({x:35,z:-118});X.fillStyle='rgba(45,132,184,.85)';X.beginPath();X.ellipse(w.x,w.y,g.overview?36:56,g.overview?90:30,-.1,0,Math.PI*2);X.fill();for(let i=0;i<12;i++){let l=worldToScreen({x:-38-(i%2)*8,z:-20-i*13}),r=worldToScreen({x:46+(i%2)*8,z:-18-i*13});tree(l.x,l.y,g.overview?5:Math.max(4,18-i*.7));tree(r.x,r.y,g.overview?5:Math.max(4,18-i*.7))}X.strokeStyle='#fff';X.lineWidth=2;X.beginPath();X.moveTo(green.x,green.y);X.lineTo(green.x,green.y-(g.overview?18:48));X.stroke();X.fillStyle='#e63d3d';X.beginPath();X.moveTo(green.x,green.y-(g.overview?18:48));X.lineTo(green.x+25,green.y-(g.overview?12:38));X.lineTo(green.x,green.y-(g.overview?7:28));X.fill()}
-function tree(x,y,s){X.fillStyle='#684a2e';X.fillRect(x-1,y-s*.2,2,s*.5);X.fillStyle='#205e2c';X.beginPath();X.arc(x,y-s*.35,s*.55,0,Math.PI*2);X.fill()}
-function pathPoints(power=1,path=0){let dx=g.aim.x-g.ball.x,dz=g.aim.z-g.ball.z,len=Math.hypot(dx,dz)||1,ux=dx/len,uz=dz/len,rx=-uz,rz=ux,c=clubs[g.club],mult=g.flight==='high'?.93:g.flight==='low'?1.05:1,carry=c[1]*g.factor*power*mult,shape=g.shape==='draw'?-1:g.shape==='fade'?1:0,pts=[];for(let i=0;i<=48;i++){let t=i/48,f=Math.min(carry,len*1.12)*t,side=shape*5*Math.sin(Math.PI*t)+path*6*t*t+1.6*t*t,h=Math.sin(Math.PI*t)*(g.flight==='high'?48:g.flight==='low'?22:35)*power;pts.push({x:g.ball.x+ux*f+rx*side,z:g.ball.z+uz*f+rz*side,h})}return pts}
-function puttPoints(power=1,path=0){let dx=pin.x-g.ball.x,dz=pin.z-g.ball.z,len=Math.hypot(dx,dz)||1,ux=dx/len,uz=dz/len,rx=-uz,rz=ux,travel=35*power*.36,pts=[];for(let i=0;i<=36;i++){let t=i/36,side=(len/20*3.2)*Math.pow(t,1.65)+path*1.6*t*t;pts.push({x:g.ball.x+ux*travel*t+rx*side,z:g.ball.z+uz*travel*t+rz*side,h:0})}return pts}
-function drawPrediction(){let pts=g.lie==='green'?puttPoints(Math.min(1,distPin()/12+.12),0):pathPoints();X.save();X.strokeStyle='rgba(255,246,130,.85)';X.lineWidth=2;X.setLineDash([7,6]);X.beginPath();pts.forEach((p,i)=>{let s=worldToScreen(p);let y=s.y-p.h*(g.overview?.15:1.2);i?X.lineTo(s.x,y):X.moveTo(s.x,y)});X.stroke();X.restore();if(g.lie!=='green'){let a=worldToScreen(g.aim);X.strokeStyle='#ffe36b';X.lineWidth=4;X.beginPath();X.arc(a.x,a.y,g.overview?10:18,0,Math.PI*2);X.stroke()}}
-function drawGolfer(){if(g.lie==='green'||g.overview)return;let b=worldToScreen(g.ball);X.strokeStyle='#173a28';X.lineWidth=7;X.beginPath();X.moveTo(b.x-14,b.y-49);X.lineTo(b.x-10,b.y-20);X.moveTo(b.x-14,b.y-32);X.lineTo(b.x+2,b.y-18);X.moveTo(b.x-10,b.y-20);X.lineTo(b.x-18,b.y+2);X.moveTo(b.x-10,b.y-20);X.lineTo(b.x+2,b.y+2);X.stroke();X.fillStyle='#c98f69';X.beginPath();X.arc(b.x-14,b.y-58,8,0,Math.PI*2);X.fill()}
-function drawBall(p=g.ball){let s=worldToScreen(p);X.fillStyle='#fff';X.beginPath();X.arc(s.x,s.y,5,0,Math.PI*2);X.fill();X.strokeStyle='rgba(0,0,0,.25)';X.stroke()}
-function draw(){if(!W)return;drawCourse();drawPrediction();drawGolfer();drawBall()}
-function distPin(){return Math.hypot(g.ball.x-pin.x,g.ball.z-pin.z)}function ordinal(n){return n+(n===1?'ST':n===2?'ND':n===3?'RD':'TH')}function update(){let d=distPin(),names={tee:'TEE',fairway:'FAIRWAY',rough:'ROUGH',bunker:'BUNKER',green:'GREEN'};lie.textContent=names[g.lie]+' • '+Math.round(g.factor*100)+'%';dist.textContent=g.lie==='green'?Math.round(d*3)+' FT TO CUP':Math.round(d)+' YDS TO PIN';stroke.textContent=ordinal(g.shot)+' SHOT';score.textContent=g.score===0?'EVEN':g.score>0?'+'+g.score:g.score;let c=clubs[g.club];club.innerHTML=c[0]+'<small>'+(g.lie==='green'?'PUTT':Math.round(c[1]*g.factor)+' YDS')+'</small>';tag.textContent=g.lie==='green'?'GREEN BREAKS RIGHT':'DRAG THE LANDING RING TO AIM';draw()}
-function msg(a,b='',ms=1200){message.querySelector('b').textContent=a;message.querySelector('span').textContent=b;message.classList.add('on');clearTimeout(msg.t);msg.t=setTimeout(()=>message.classList.remove('on'),ms)}
-function autoClub(){let d=distPin()/g.factor,best=0,e=1e9;clubs.slice(0,-1).forEach((c,i)=>{let x=Math.abs(c[1]-d);if(x<e){e=x;best=i}});g.club=best;g.aim={...pin}}
-function resolve(end,isPutt,startPos){g.flying=false;g.ball={x:end.x,z:end.z};g.shot++;if(isPutt){g.putts++;let d=distPin();if(d<.7){g.ball={...pin};finishHole();return}msg('MISSED THE EDGE',Math.round(d*3)+' feet remains');g.lie='green';g.factor=1;g.control=1}else{let t=terrain(g.ball);if(t[0]==='water'){g.shot++;g.ball={x:startPos.x+(end.x-startPos.x)*.7,z:startPos.z+(end.z-startPos.z)*.7};t=['rough',.82,.7];msg('WATER • ONE STROKE PENALTY','Dropped near the crossing point.',1800)}else{if(t[0]==='green'&&g.shot-1<=2)g.gir=true;msg(t[0].toUpperCase(),t[0]==='rough'?'Distance 82% • wider dispersion':t[0]==='bunker'?'Distance 72% • limited control':distPin()<10?'Inside 30 feet':Math.round(distPin())+' yards remains')}g.lie=t[0];g.factor=t[1];g.control=t[2];if(g.lie==='green'){g.club=9;g.aim={...pin}}else autoClub()}update()}
-function animateShot(pts,isPutt){g.flying=true;let start=performance.now(),dur=isPutt?1100:1700,startPos={...g.ball};function f(now){let t=Math.min(1,(now-start)/dur),idx=t*(pts.length-1),i=Math.floor(idx),q=pts[Math.min(i,pts.length-1)],n=pts[Math.min(i+1,pts.length-1)],p={x:q.x+(n.x-q.x)*(idx-i),z:q.z+(n.z-q.z)*(idx-i),h:q.h+(n.h-q.h)*(idx-i)};drawCourse();drawPrediction();drawGolfer();let s=worldToScreen(p);X.fillStyle='#fff';X.beginPath();X.arc(s.x,s.y-p.h*(g.overview?.15:1.2),5,0,Math.PI*2);X.fill();if(t<1)requestAnimationFrame(f);else resolve(pts[pts.length-1],isPutt,startPos)}requestAnimationFrame(f)}
-function hit(power,tempo,path){if(g.flying)return;let impact=Math.abs(path)<.2&&tempo>.45&&tempo<.8?'PURE':Math.abs(path)<.45?'SOLID':'OFF LINE';msg(impact,Math.round(power*100)+'% power • '+tempo.toFixed(2)+' tempo',900);let pts=g.lie==='green'?puttPoints(power,path):pathPoints(power,path*(2-g.control));animateShot(pts,g.lie==='green')}
-function finishHole(){let strokes=g.shot-1;g.score=strokes-3;let names={'-2':'EAGLE','-1':'BIRDIE','0':'PAR','1':'BOGEY','2':'DOUBLE BOGEY'};finishTitle.textContent=names[g.score]||((g.score>0?'+':'')+g.score);finishText.textContent=g.score<=0?'That is the golf feel we are building around.':'The hole punished the miss, exactly as it should.';fs.textContent=strokes;fg.textContent=g.gir?'YES':'NO';fp.textContent=g.putts;finish.style.display='flex'}
-function resetHole(){Object.assign(g,{shot:1,score:0,putts:0,gir:false,club:3,shape:'straight',flight:'normal',ball:{x:0,z:0},aim:{x:3,z:-168},lie:'tee',factor:1,control:1,dragAim:false,swing:null,flying:false,overview:false});finish.style.display='none';overview.textContent='◉';update();msg('PAR 3 • 168 YARDS','Water guards the right side.',1600)}
-C.addEventListener('pointerdown',e=>{if(!g.started||g.flying||g.lie==='green')return;g.dragAim=true;C.setPointerCapture(e.pointerId);aimFrom(e)});C.addEventListener('pointermove',e=>{if(g.dragAim)aimFrom(e)});C.addEventListener('pointerup',()=>g.dragAim=false);function aimFrom(e){let r=C.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(g.overview){g.aim={x:(x-W/2)/2.2,z:-(y-H*.16)/2.55}}else{let dz=Math.max(20,(H*.78-y)/1.8),scale=1+dz/85;g.aim={x:g.ball.x+(x-W/2)/(4.2/scale),z:g.ball.z-dz}}let dx=g.aim.x-g.ball.x,dz=g.aim.z-g.ball.z,l=Math.hypot(dx,dz),max=clubs[g.club][1]*g.factor*1.08;if(l>max){g.aim.x=g.ball.x+dx/l*max;g.aim.z=g.ball.z+dz/l*max}draw()}
-let sp=null;swing.addEventListener('pointerdown',e=>{if(!g.started||g.flying)return;let r=swing.getBoundingClientRect();sp=e.pointerId;swing.setPointerCapture(e.pointerId);g.swing={sy:e.clientY-r.top,sx:e.clientX-r.left,max:0,phase:'back',top:0,ly:e.clientY-r.top}});swing.addEventListener('pointermove',e=>{if(e.pointerId!==sp||!g.swing)return;let r=swing.getBoundingClientRect(),y=e.clientY-r.top,x=e.clientX-r.left,s=g.swing,dy=y-s.sy;s.max=Math.max(s.max,dy);if(s.phase==='back'&&s.max>18&&y<s.ly-2){s.phase='down';s.top=performance.now()}s.ly=y;thumb.style.top='calc(50% + '+Math.max(-40,Math.min(40,dy))+'px)';thumb.style.left='calc(50% + '+Math.max(-30,Math.min(30,x-s.sx))+'px)';load.textContent=Math.round(Math.max(0,Math.min(1,s.max/38))*100)+'%';tempo.textContent=s.phase==='down'?'TEMPO NOW':'TEMPO —'});function end(e){if(e.pointerId!==sp||!g.swing)return;let r=swing.getBoundingClientRect(),y=e.clientY-r.top,x=e.clientX-r.left,s=g.swing,power=Math.max(0,Math.min(1,s.max/38)),forward=s.max-(y-s.sy),done=s.phase==='down'&&forward>34,tm=done?(performance.now()-s.top)/1000:2,path=Math.max(-1,Math.min(1,(x-s.sx)/45));g.swing=null;sp=null;thumb.style.top='50%';thumb.style.left='50%';load.textContent='0%';tempo.textContent='TEMPO —';done&&power>.18?hit(power,tm,path):msg('INCOMPLETE SWING','Pull down, then drive upward.',1100)}swing.addEventListener('pointerup',end);swing.addEventListener('pointercancel',end);
-document.querySelectorAll('[data-shape]').forEach(b=>b.onclick=()=>{g.shape=b.dataset.shape;document.querySelectorAll('[data-shape]').forEach(x=>x.classList.toggle('on',x===b));draw()});document.querySelectorAll('[data-flight]').forEach(b=>b.onclick=()=>{g.flight=b.dataset.flight;document.querySelectorAll('[data-flight]').forEach(x=>x.classList.toggle('on',x===b));draw()});club.onclick=()=>{if(g.lie==='green')return msg('PUTTER SELECTED','Medium-fast green.');g.club=(g.club+1)%9;let dx=g.aim.x-g.ball.x,dz=g.aim.z-g.ball.z,l=Math.hypot(dx,dz)||1,d=clubs[g.club][1]*g.factor;g.aim={x:g.ball.x+dx/l*d,z:g.ball.z+dz/l*d};update()};overview.onclick=()=>{g.overview=!g.overview;overview.textContent=g.overview?'◎':'◉';draw()};reset.onclick=resetHole;startBtn.onclick=()=>{g.started=true;start.classList.add('hidden');resetHole()};again.onclick=resetHole;resize();
-</script>
+<main class="app" id="app">
+  <canvas id="game" aria-label="Golf game canvas"></canvas>
+
+  <header class="hud">
+    <section class="hud-card">
+      <strong id="lie">TEE · 100%</strong>
+      <span id="distance">168 YDS TO PIN</span>
+      <span id="wind">WIND 6 MPH ↗</span>
+    </section>
+    <section class="hud-card hud-right">
+      <strong>HOLE 1 · PAR 3</strong>
+      <span id="stroke">1ST SHOT</span>
+      <span id="score">EVEN</span>
+    </section>
+  </header>
+
+  <div class="instruction" id="instruction">DRAG THE LANDING TARGET TO AIM</div>
+
+  <section class="shot-panel" id="shotPanel">
+    <div class="eyebrow">SHOT SHAPE</div>
+    <div class="segmented">
+      <button data-shape="draw">DRAW</button>
+      <button class="selected" data-shape="straight">STRAIGHT</button>
+      <button data-shape="fade">FADE</button>
+    </div>
+    <div class="eyebrow spacer">TRAJECTORY</div>
+    <div class="segmented">
+      <button data-flight="low">LOW</button>
+      <button class="selected" data-flight="normal">NORMAL</button>
+      <button data-flight="high">HIGH</button>
+    </div>
+  </section>
+
+  <button class="club-button" id="clubButton">7I<small>172 YDS</small></button>
+  <button class="round-button overview" id="overviewButton" aria-label="Toggle course overview">MAP</button>
+  <button class="round-button reset" id="resetButton" aria-label="Reset hole">R</button>
+
+  <section class="swing-zone" id="swingZone">
+    <div class="swing-track"><i></i></div>
+    <div class="swing-thumb" id="swingThumb">SWING</div>
+    <div class="swing-copy">PULL DOWN<br>DRIVE UP</div>
+    <div class="swing-readout">
+      <small>LOAD</small><strong id="load">0%</strong><span id="tempo">TEMPO —</span>
+    </div>
+  </section>
+
+  <section class="shot-feedback" id="feedback">
+    <strong></strong><span></span>
+  </section>
+
+  <section class="start-screen" id="startScreen">
+    <div class="start-card">
+      <div class="logo">⛳</div>
+      <small>FAIRWAY GOLF CORE · V2</small>
+      <h1>One hole.<br>Better golf feel.</h1>
+      <p>This build is focused on camera, aiming, swing path, ball tracking, lies and putting.</p>
+      <ul>
+        <li>Drag the bright landing target to aim</li>
+        <li>Pull down, then accelerate upward through impact</li>
+        <li>Your return path and tempo control the miss</li>
+        <li>The camera follows the ball and changes for putting</li>
+      </ul>
+      <button class="primary" id="startButton">PLAY THE PAR 3</button>
+    </div>
+  </section>
+
+  <section class="finish-screen" id="finishScreen">
+    <div class="finish-card">
+      <small>HOLE COMPLETE</small>
+      <h2 id="finishTitle">PAR</h2>
+      <p id="finishText">Solid work.</p>
+      <div class="finish-stats">
+        <div><small>STROKES</small><strong id="finishStrokes">3</strong></div>
+        <div><small>GIR</small><strong id="finishGir">YES</strong></div>
+        <div><small>PUTTS</small><strong id="finishPutts">2</strong></div>
+      </div>
+      <button class="secondary" id="againButton">PLAY AGAIN</button>
+    </div>
+  </section>
+</main>
+<script src="game.js"></script>
 </body>
 </html>
