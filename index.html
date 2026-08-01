@@ -16,7 +16,7 @@
 </head>
 <body>
   <div id="boot">
-    <div id="loading"><strong>FAIRWAY GOLF CORE</strong><span>Loading the proven 3D golf engine…</span></div>
+    <div id="loading"><strong>FAIRWAY GOLF CORE</strong><span>Loading enhanced 3D gameplay…</span></div>
     <div id="error"><strong>COURSE COULD NOT LOAD</strong><span>Refresh the page to try again.</span></div>
   </div>
   <script>
@@ -28,9 +28,9 @@
         if(!response.ok) throw new Error('Golf source returned '+response.status);
         let html=await response.text();
         html=html.replace(/<head([^>]*)>/i,'<head$1><base href="'+source+'"><title>Fairway Golf Core</title>');
-        const visuals='<script src="'+patchBase+'/putting-visibility.js?v=1"><'+'/script>';
-        const directStart='<script>window.addEventListener("load",function(){setTimeout(function(){try{if(typeof startMode==="function")startMode("quick",1);var home=document.getElementById("menubtn");if(home)home.style.display="none";document.title="Fairway Golf Core";}catch(err){console.error("Golf Core direct start failed",err);}},160);});<'+'/script>';
-        html=html.replace(/<\/body>/i,visuals+directStart+'</body>');
+        const enhancements='<script src="'+patchBase+'/core-enhancements-v2.js?v=1"><'+'/script>';
+        const directStart='<script>window.addEventListener("load",function(){setTimeout(function(){try{if(typeof startMode==="function")startMode("quick",1);var home=document.getElementById("menubtn");if(home)home.style.display="none";document.title="Fairway Golf Core — Enhanced";}catch(err){console.error("Golf Core direct start failed",err);}},160);});<'+'/script>';
+        html=html.replace(/<\/body>/i,enhancements+directStart+'</body>');
         document.open();document.write(html);document.close();
       }catch(error){
         console.error(error);
