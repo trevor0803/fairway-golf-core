@@ -28,8 +28,8 @@
         if(!response.ok) throw new Error('Golf source returned '+response.status);
         let html=await response.text();
         html=html.replace(/<head([^>]*)>/i,'<head$1><base href="'+source+'"><title>Fairway Golf Core</title>');
-        html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="'+patchBase+'/gameplay-v2.css?v=3"></head>');
-        const patches='<script src="'+patchBase+'/gameplay-v2.js?v=3"><'+'/script>';
+        html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="'+patchBase+'/gameplay-v2.css?v=4"></head>');
+        const patches='<script src="'+patchBase+'/gameplay-v2.js?v=4"><'+'/script><script src="'+patchBase+'/swing-hotfix.js?v=1"><'+'/script>';
         const directStart='<script>window.addEventListener("load",function(){setTimeout(function(){try{if(typeof startMode==="function")startMode("quick",1);var home=document.getElementById("menubtn");if(home)home.style.display="none";document.title="Fairway Golf Core — Gameplay Overhaul";}catch(err){console.error("Golf Core direct start failed",err);}},160);});<'+'/script>';
         html=html.replace(/<\/body>/i,patches+directStart+'</body>');
         document.open();document.write(html);document.close();
