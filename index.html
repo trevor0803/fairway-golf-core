@@ -22,13 +22,15 @@
   <script>
     (async function loadGolfCore(){
       const source='https://fairway-legends.vercel.app/';
+      const patchBase=location.origin;
       try{
         const response=await fetch(source,{cache:'no-store'});
         if(!response.ok) throw new Error('Golf source returned '+response.status);
         let html=await response.text();
         html=html.replace(/<head([^>]*)>/i,'<head$1><base href="'+source+'"><title>Fairway Golf Core</title>');
+        const fairwayFix='<script src="'+patchBase+'/fairway-surface-fix.js?v=1"><'+'/script>';
         const directStart='<script>window.addEventListener("load",function(){setTimeout(function(){try{if(typeof startMode==="function")startMode("quick",1);var home=document.getElementById("menubtn");if(home)home.style.display="none";document.title="Fairway Golf Core";}catch(err){console.error("Golf Core direct start failed",err);}},160);});<'+'/script>';
-        html=html.replace(/<\/body>/i,directStart+'</body>');
+        html=html.replace(/<\/body>/i,fairwayFix+directStart+'</body>');
         document.open();document.write(html);document.close();
       }catch(error){
         console.error(error);
