@@ -1,0 +1,2 @@
+Three.js golf engine restored from fairway-legends historical commit e81d72e11fc870392e9b613d76eb376d700d57de.
+Source repository remains untouched.
