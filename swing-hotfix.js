@@ -32,7 +32,9 @@ function install(){
   };
   const details=document.getElementById('fgSwingDetails');
   if(details)details.style.display='none';
-  console.info('Fairway Golf Core swing launch hotfix installed');
+  console.info('Fairway Golf Core swing launch hotfix installed last');
 }
-install();
+function installLast(){setTimeout(install,80);}
+if(document.readyState==='complete')installLast();
+else window.addEventListener('load',installLast,{once:true});
 })();
