@@ -1,0 +1,7 @@
+(()=>{
+const S=window.SUNDAY,R=S?.R;if(!S||!R||S._realism7)return;S._realism7=true;
+const base=R.evaluateOwnership;
+R.evaluateOwnership=()=>{const r=base(),prior=(S.state.ownershipReviews||[]).filter(x=>x.team===r.team),p=prior[0]||null,priorDanger=p&&['Hot Seat','Critical'].includes(p.status),last3=[...prior.slice(0,2).map(x=>x.wins),r.wins],threeBad=last3.length>=3&&last3.every(x=>x<=7),organizationalBreak=r.cultureIndex<38&&r.alignmentIndex<42&&r.lateWins<=2,catastrophic=r.wins<=3&&r.score<48,missedBadly=r.wins<r.expected-4.25,playoff=r.postseason!=='Missed playoffs'&&r.postseason!=='Season complete';let fired=false;if(!playoff){if(r.score<24)fired=true;else if(r.tenure===1&&r.wins<=2&&r.cultureIndex<35&&r.score<30)fired=true;else if(r.tenure>=2&&catastrophic)fired=true;else if(r.tenure>=2&&priorDanger&&r.score<40&&r.wins<=5)fired=true;else if(r.tenure>=3&&priorDanger&&r.score<43&&r.wins<=7)fired=true;else if(r.tenure>=3&&threeBad&&r.score<49)fired=true;else if(organizationalBreak&&missedBadly)fired=true}else if(r.cultureIndex<28&&r.alignmentIndex<30&&r.score<25)fired=true;r.fired=fired;r.status=fired?'Fired':r.score>=75?'Secure':r.score>=60?'Stable':r.score>=50?'Watch':r.score>=38?'Hot Seat':'Critical';return r};
+const oldAudit=S.realismAudit;S.realismAudit=()=>{const a=oldAudit();return{...a,version:'11.4.1-career',checks:{...a.checks,firingCalibration:true}}};if(window.SUNDAY_QA){window.SUNDAY_QA.realismAudit=S.realismAudit;window.SUNDAY_QA.evaluateOwnership=R.evaluateOwnership}
+S.render();
+})();
