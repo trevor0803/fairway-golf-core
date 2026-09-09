@@ -4,4 +4,3 @@ S.render();
 S.hydrateRosters();
 S.hydrateSchedule();
 window.SUNDAY_QA={getState:()=>S.state,startGame:S.startGame,nextDrive:S.nextDrive,resolveDecision:S.resolveDecision,runSeason:S.simSeasonQA,advanceOffseason:S.advanceOffseason,renderHtml:()=>document.getElementById('app').innerHTML};
-(()=>{const base='https://cdn.jsdelivr.net/gh/trevor0803/fairway-golf-core@sunday-coach-v10-host/sunday-v10/',files=['realism0.js','realism1.js','realism2.js','realism3.js','realism4.js','realism5.js','realism6.js','realism7.js','realism8.js','realism9.js','realism10.js','realism11.js','realism12.js'];let i=0;const next=()=>{if(i>=files.length)return;const s=document.createElement('script');s.src=base+files[i++]+'?v=661c896ebe43';s.async=false;s.onload=next;s.onerror=()=>{console.error('SUNDAY realism module failed',s.src);next()};document.body.appendChild(s)};next()})();
