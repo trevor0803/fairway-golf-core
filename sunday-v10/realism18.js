@@ -1,6 +1,6 @@
 (()=>{
 const S=window.SUNDAY,R=S?.R;if(!S||!R||S._realism18)return;S._realism18=true;
-S.BUILD={label:'Updated Sep 8, 2026 · 9:09 PM ET',version:'11.15',stamp:'2026-09-08T21:09:36-04:00'};
+S.BUILD={label:'Updated Sep 8, 2026 · 9:38 PM ET',version:'11.15',stamp:'2026-09-08T21:38:28-04:00'};
 const REG='sunday_careers_v3';
 let creating=false;
 const read=()=>{try{return JSON.parse(localStorage.getItem(REG))||{active:null,careers:{}}}catch(e){return{active:null,careers:{}}}};
