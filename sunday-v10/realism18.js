@@ -1,0 +1,22 @@
+(()=>{
+const S=window.SUNDAY,R=S?.R;if(!S||!R||S._realism18)return;S._realism18=true;
+S.BUILD={label:'Updated Sep 8, 2026 · 9:09 PM ET',version:'11.15',stamp:'2026-09-08T21:09:36-04:00'};
+const REG='sunday_careers_v3';
+let creating=false;
+const read=()=>{try{return JSON.parse(localStorage.getItem(REG))||{active:null,careers:{}}}catch(e){return{active:null,careers:{}}}};
+const write=r=>localStorage.setItem(REG,JSON.stringify(r));
+const parseActive=(selector,re,fallback)=>{const el=document.querySelector(selector);const raw=el?.getAttribute('onclick')||'';const m=raw.match(re);return m?.[1]||fallback};
+const showError=err=>{creating=false;let box=document.getElementById('s18-error');if(!box){box=document.createElement('div');box.id='s18-error';const actions=document.querySelector('#s17-career .s17-actions:last-of-type');(actions?.parentNode||document.getElementById('s17-career'))?.insertBefore(box,actions||null)}box.textContent='Could not start career: '+String(err?.message||err||'Unknown error');const btn=document.querySelector("button[onclick*='SUNDAYCareer.create']");if(btn){btn.disabled=false;btn.textContent='Start Career'}};
+const fresh=(name,role,team)=>{const st=S.baseState();st.careerId='career-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);st.careerSetupComplete=true;st.coach={...st.coach,name,role,team,employed:true,reputation:48,jobSecurity:role==='HC'?62:68,career:[{season:2026,team,role,record:'0-0'}],interviews:[],staffTree:[]};st.careerStatus='EMPLOYED';st.ui={...(st.ui||{}),tab:'week',playerId:null,guideOpen:true,guideSeen:false,gamePane:'overview',careerHome:false,careerWizard:false};st.frontOffice=team==='TEN'?{owner:'Amy Adams Strunk',gm:'Mike Borgonzi'}:{owner:`${team} ownership`,gm:`${team} general manager`};st.staff=st.staff||{};st.staff.hc=role==='HC'?{name,title:'Head Coach',quality:82}:{name:`${team} Head Coach`,title:'Head Coach',quality:82};if(role==='OC')st.staff.oc={name,title:'Offensive Coordinator',quality:82};if(role==='DC')st.staff.dc={name,title:'Defensive Coordinator',quality:82};return st};
+const summary=st=>{const t=st.league?.[st.coach?.team];return{id:st.careerId,name:st.coach?.name||'Coach',role:st.coach?.role||'OC',team:st.coach?.team||'—',teamName:t?`${t.city} ${t.nick}`:st.coach?.team||'—',year:st.season?.year||2026,week:st.season?.week||1,day:st.season?.day||0,phase:st.season?.phase||'REGULAR',record:t?S.record(t):'0-0',updatedAt:Date.now(),state:st}};
+const start=()=>{if(creating)return;creating=true;const btn=document.querySelector("button[onclick*='SUNDAYCareer.create']");if(btn){btn.disabled=true;btn.textContent='Starting…'}try{document.activeElement?.blur?.();const name=(document.getElementById('s17-name')?.value||'Coach').trim()||'Coach';const role=parseActive('.s17-role.active',/role\('([^']+)'\)/,'OC');const team=parseActive('.s17-team.active',/team\('([^']+)'\)/,'MIA');const st=fresh(name,role,team);S.state=st;R.ensureCoachProfile?.();const reg=read();reg.active=st.careerId;reg.careers=reg.careers||{};reg.careers[st.careerId]=summary(st);write(reg);localStorage.setItem('sunday_last_started_career',st.careerId);setTimeout(()=>{const q='?career='+encodeURIComponent(st.careerId)+'&build=11.15';window.location.replace(window.location.pathname+q)},40)}catch(err){console.error('SUNDAY start career failed',err);showError(err)}};
+if(window.SUNDAYCareer)window.SUNDAYCareer.create=start;
+const style=document.createElement('style');style.textContent=`
+#s17-career button,.s17-btn,.s17-role,.s17-team{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;touch-action:manipulation!important}#s18-error{margin:10px 0;padding:10px 11px;border:1px solid rgba(255,91,91,.38);border-radius:11px;background:rgba(255,91,91,.06);color:#ffc7c7;font-size:9px;line-height:1.4}.s18-starting{opacity:.78;pointer-events:none}
+`;document.head.appendChild(style);
+const hit=e=>{const b=e.target?.closest?.("button[onclick*='SUNDAYCareer.create']");if(!b)return;e.preventDefault();e.stopPropagation();start()};
+document.addEventListener('touchend',hit,true);
+document.addEventListener('click',hit,true);
+const stamp=document.querySelector('.s16-build,.s15-build-stamp');if(stamp)stamp.textContent=`${S.BUILD.label} · v${S.BUILD.version}`;
+const oldAudit=S.realismAudit;S.realismAudit=()=>{const a=oldAudit();return{...a,version:'11.15-mobile-start-failsafe',checks:{...a.checks,mobileStartFailSafe:true,startReloadTransition:true,startErrorSurface:true,noButtonTextSelection:true}}};
+})();
