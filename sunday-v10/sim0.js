@@ -22,7 +22,7 @@ function rotation(p,kind='snap'){
  if(pos==='DB')return d===1?.88:d===2?.7:d===3?.46:d===4?.25:.1;
  return roleW[p.role]||.25
 }
-function ol(t){const a=offPlayers(t).filter(p=>['OT','OG','C','OL'].includes(p.pos));return [...a].sort((x,y)=>depthRank(x)-depthRank(y)||rotation(y)-rotation(x)||b.overall-a.overall).slice(0,5)}
+function ol(t){const a=offPlayers(t).filter(p=>['OT','OG','C','OL'].includes(p.pos));return [...a].sort((x,y)=>depthRank(x)-depthRank(y)||rotation(y)-rotation(x)||(y.overall||0)-(x.overall||0)).slice(0,5)}
 function qb(t){return offPlayers(t).filter(p=>p.pos==='QB').sort((a,b)=>depthRank(a)-depthRank(b)||b.overall-a.overall)[0]}
 function backs(t){return offPlayers(t).filter(p=>p.pos==='RB')}
 function elig(t){return offPlayers(t).filter(p=>['RB','WR','TE'].includes(p.pos))}
